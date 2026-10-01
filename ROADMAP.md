@@ -63,21 +63,21 @@ flowchart LR
 ---
 
 ### 🟢 Fase 2: Desktop Shell & System Navigation
-- [ ] **2.1**: **Base Canvas & Wallpaper Engine**:
+- [x] **2.1**: **Base Canvas & Wallpaper Engine**:
   - Render latar belakang fluid ribbons (Gold, Blue, Purple, Green, Midnight) dengan filter brightness dari `SystemContext`.
-- [ ] **2.2**: **Desktop Widgets & Desktop Icons**:
+- [x] **2.2**: **Desktop Widgets & Desktop Icons**:
   - Cupertino Weather widget & Calendar widget dengan nested radius konsentris (`rounded-widget`).
   - Desktop shortcut icons (Macintosh HD, Documents, Readme) yang sinkron dengan VFS.
-- [ ] **2.3**: **Top Menubar (`h-28px`)**:
+- [x] **2.3**: **Top Menubar (`h-28px`)**:
   - Apple Menu () popover: About This Mac, System Settings, Lock Screen, Restart, Shut Down.
   - Contextual App Menu: Dinamis sesuai aplikasi yang sedang fokus (File, Edit, View, Window, Help).
   - Status bar kanan: Wi-Fi status, Battery indicator, Spotlight trigger, Control Center toggle, Real-time Clock dengan detik.
-- [ ] **2.4**: **Floating Dock (`h-58px`)**:
+- [x] **2.4**: **Floating Dock (`h-58px`)**:
   - Magnification animation 60 FPS hingga skala 1.35×.
   - Running indicator dot di bawah aplikasi aktif.
   - Tooltip nama aplikasi saat hover.
   - Klik untuk meluncurkan atau restore aplikasi yang diminimalkan.
-- [ ] **2.5**: **Window Host & WindowFrame**:
+- [x] **2.5**: **Window Host & WindowFrame**:
   - Komponen wrapper jendela dengan titlebar draggable, 8-way invisible handles, traffic lights (`×`, `−`, `+` on hover), dan ghost-box snapping preview.
 
 ---
