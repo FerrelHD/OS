@@ -103,42 +103,42 @@ flowchart LR
 ---
 
 ### 🟢 Fase 4: Simulated Core Applications Suite (10 Aplikasi)
-- [ ] **4.1**: **Finder**:
+- [x] **4.1**: **Finder**:
   - Dual-pane: Sidebar Favorites & Main file explorer.
   - View switcher: Icon Grid View vs List Table View.
   - Toolbar aksi: Buat folder baru, buat text file, rename, hapus ke Trash.
   - Double-click file teks langsung meluncurkan aplikasi Notes.
-- [ ] **4.2**: **Terminal (macOS zsh)**:
+- [x] **4.2**: **Terminal (macOS zsh)**:
   - Retro-modern dark console (`rgba(15,23,42,0.90)`).
   - Interactive commands: `help`, `ls`, `cd`, `cat`, `clear`, `whoami`, `date`, `neofetch` (Apple ASCII art), `theme`.
-- [ ] **4.3**: **Calculator**:
+- [x] **4.3**: **Calculator**:
   - Tata letak kalkulator native macOS dengan display responsif, operasi aritmatika lengkap, dan input keyboard fisik.
-- [ ] **4.4**: **Notes (TextEdit)**:
+- [x] **4.4**: **Notes (TextEdit)**:
   - Multi-note manager: daftar catatan di sidebar, live text/markdown editor, fitur pencarian catatan, dan auto-save ke `localStorage`.
-- [ ] **4.5**: **Gemini Desktop (Google Gemini)**:
+- [x] **4.5**: **Gemini Desktop (Google Gemini)**:
   - UI modern dengan logo Gemini Sparkle.
   - Model selector: Gemini 2.5 Flash, Gemini 2.5 Pro, Gemini Ultra.
   - Starter prompt cards (*Coding*, *Creative Writing*, *Data Analysis*, *Reasoning*).
   - Chat engine simulasi dengan rendering Markdown & tombol **Copy Code**.
   - Riwayat percakapan tersimpan di `localStorage`.
-- [ ] **4.6**: **Safari Browser**:
+- [x] **4.6**: **Safari Browser**:
   - Tabbed navigation (tambah tab, tutup tab, pindah tab).
   - Address bar untuk URL / pencarian.
   - Quick bookmarks bar (Apple, Gemini, GitHub, YouTube, Google).
   - Mock web render: Halaman hasil Google Search, Apple info, dan GitHub project.
-- [ ] **4.7**: **Apple Music**:
+- [x] **4.7**: **Apple Music**:
   - Hero album banner dengan gradien dinamis.
   - Track list dan kontrol audio interaktif: Play/Pause, seek track bar progress, Next/Prev track, Volume control.
   - Termasuk audio player fungsional dengan sample ambient/lo-fi tracks.
-- [ ] **4.8**: **Photos**:
+- [x] **4.8**: **Photos**:
   - Grid galeri foto resolusi tinggi.
   - Zoom slider untuk mengubah skala grid foto secara dinamis.
   - Lightbox modal ukuran penuh dengan navigasi panah kiri/kanan.
-- [ ] **4.9**: **Messages (iMessage)**:
+- [x] **4.9**: **Messages (iMessage)**:
   - Sidebar daftar obrolan kontak.
   - Chat bubble biru (user) dan abu-abu (kontak).
   - Interactive composer untuk mengirim pesan dan bot auto-reply responsif.
-- [ ] **4.10**: **System Settings**:
+- [x] **4.10**: **System Settings**:
   - Sidebar preferensi: Appearance (Light/Dark/Auto, Accent Color picker), Wallpaper gallery selector, Dock size & magnification slider.
 
 ---

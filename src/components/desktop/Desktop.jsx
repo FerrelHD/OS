@@ -6,7 +6,7 @@ import DesktopIcons from './DesktopIcons';
 import DesktopWidgets from './DesktopWidgets';
 import Dock from '../dock/Dock';
 import WindowFrame from '../window/WindowFrame';
-import { getAppIcon } from '../../constants/appRegistry';
+import AppDispatcher from '../apps/AppDispatcher';
 import Spotlight from '../overlays/Spotlight';
 import ControlCenter from '../overlays/ControlCenter';
 import Launchpad from '../overlays/Launchpad';
@@ -38,20 +38,9 @@ export default function Desktop() {
 
         {/* Window Manager Layer */}
         {windows.map((win) => {
-          const IconComponent = getAppIcon(win.icon);
           return (
             <WindowFrame key={win.id} window={win}>
-              <div className="flex-1 p-6 flex flex-col items-center justify-center text-center">
-                <div className="w-16 h-16 mb-4 drop-shadow-md">
-                  <IconComponent />
-                </div>
-                <h2 className="text-base font-semibold text-slate-800 dark:text-slate-100">
-                  {win.title}
-                </h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm">
-                  Aplikasi {win.appName} siap untuk integrasi fitur mendalam pada Fase 4.
-                </p>
-              </div>
+              <AppDispatcher appId={win.id} windowProps={win.customProps} />
             </WindowFrame>
           );
         })}
