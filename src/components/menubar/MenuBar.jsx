@@ -155,17 +155,27 @@ export default function MenuBar() {
       {/* Right Status Bar */}
       <div className="flex items-center space-x-2 text-xs">
         <button
-          onClick={() => {}}
+          onClick={() => {
+            setIsControlCenterOpen(!isControlCenterOpen);
+            setIsSpotlightOpen(false);
+          }}
           className="hover:opacity-75 p-1 rounded transition"
-          title="Wi-Fi: Connected to GoldenGate_5G"
+          title="Wi-Fi: Connected to GoldenGate_5G (Click to open Control Center)"
         >
           <Wifi className="w-3.5 h-3.5" />
         </button>
 
-        <div className="flex items-center space-x-1" title="Battery: 98% (Power Adapter Connected)">
+        <button
+          onClick={() => {
+            setIsControlCenterOpen(!isControlCenterOpen);
+            setIsSpotlightOpen(false);
+          }}
+          className="flex items-center space-x-1 hover:opacity-75 p-0.5 rounded transition"
+          title="Battery: 98% (Power Adapter Connected, Normal Health)"
+        >
           <span className="text-[11px]">98%</span>
           <Battery className="w-4 h-4" />
-        </div>
+        </button>
 
         <button
           onClick={() => {

@@ -7,6 +7,11 @@ import DesktopWidgets from './DesktopWidgets';
 import Dock from '../dock/Dock';
 import WindowFrame from '../window/WindowFrame';
 import { getAppIcon } from '../../constants/appRegistry';
+import Spotlight from '../overlays/Spotlight';
+import ControlCenter from '../overlays/ControlCenter';
+import Launchpad from '../overlays/Launchpad';
+import AboutThisMac from '../overlays/AboutThisMac';
+import LockScreen from '../overlays/LockScreen';
 
 export default function Desktop() {
   const { currentWallpaper, brightness } = useSystem();
@@ -54,6 +59,13 @@ export default function Desktop() {
 
       {/* Bottom Floating Dock (h-58px) */}
       <Dock />
+
+      {/* System Overlays (Fase 3) */}
+      <Spotlight />
+      <ControlCenter />
+      <Launchpad />
+      <AboutThisMac />
+      <LockScreen />
     </div>
   );
 }

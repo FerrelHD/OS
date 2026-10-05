@@ -83,21 +83,21 @@ flowchart LR
 ---
 
 ### 🟢 Fase 3: System Overlays
-- [ ] **3.1**: **Spotlight Search Modal (`Cmd/Ctrl+K` / `Cmd/Ctrl+Space`)**:
+- [x] **3.1**: **Spotlight Search Modal (`Cmd/Ctrl+K` / `Cmd/Ctrl+Space`)**:
   - Lebar 600px, acrylic frosted glass, floating di tengah layar.
   - Real-time instant search: aplikasi, file VFS, dan kalkulator matematika instan (`25 * 4 = 100`).
   - Navigasi keyboard penuh (`ArrowUp`, `ArrowDown`, `Enter`, `Escape`).
-- [ ] **3.2**: **Control Center Popover**:
+- [x] **3.2**: **Control Center Popover**:
   - Lebar 320px di pojok kanan atas.
   - Modul Wi-Fi, Bluetooth, Dark Mode toggle.
   - Master Sliders: Display Brightness & System Audio Volume.
   - Now Playing mini controller (terhubung ke Apple Music).
-- [ ] **3.3**: **Launchpad**:
+- [x] **3.3**: **Launchpad**:
   - Tampilan grid fullscreen ultra-blurred (`backdrop-blur-2xl`).
   - Live search input & interaksi klik untuk meluncurkan aplikasi.
-- [ ] **3.4**: **Lock Screen Guard**:
+- [x] **3.4**: **Lock Screen Guard**:
   - Jam besar San Francisco Display, tanggal, avatar profil pengguna, dan tombol unlock.
-- [ ] **3.5**: **About This Mac Modal**:
+- [x] **3.5**: **About This Mac Modal**:
   - Spesifikasi sistem macOS Golden Gate (Chip, Memory, OS version, Serial Number dummy).
 
 ---

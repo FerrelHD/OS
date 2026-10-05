@@ -178,3 +178,33 @@ export const SettingsIcon = ({ className = "w-full h-full" }) => (
     <circle cx="50" cy="50" r="14" fill="#64748B" />
   </svg>
 );
+
+// Launchpad Icon
+export const LaunchpadIcon = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 100 100" fill="none">
+    <defs>
+      <linearGradient id="launchpad-bg" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#64748B" />
+        <stop offset="1" stopColor="#334155" />
+      </linearGradient>
+      <linearGradient id="rocket-grad" x1="30" y1="30" x2="70" y2="70" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#F8FAFC" />
+        <stop offset="1" stopColor="#CBD5E1" />
+      </linearGradient>
+    </defs>
+    <rect width="100" height="100" rx="22" fill="url(#launchpad-bg)" />
+    {/* Rocket Body */}
+    <g transform="rotate(45 50 50)">
+      <path d="M50 20 C60 30 65 50 65 65 L35 65 C35 50 40 30 50 20 Z" fill="url(#rocket-grad)" />
+      {/* Porthole */}
+      <circle cx="50" cy="42" r="7" fill="#38BDF8" />
+      {/* Fins */}
+      <path d="M35 55 L22 68 L35 66 Z" fill="#EF4444" />
+      <path d="M65 55 L78 68 L65 66 Z" fill="#EF4444" />
+      {/* Flame */}
+      <polygon points="44,65 50,78 56,65" fill="#F59E0B" />
+      <polygon points="46,65 50,73 54,65" fill="#FBBF24" />
+    </g>
+  </svg>
+);
+

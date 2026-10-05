@@ -3,10 +3,11 @@ import { useSystem } from '../../context/SystemContext';
 import { useWindow } from '../../context/WindowContext';
 import { useDockMagnification } from '../../hooks/useDockMagnification';
 import { APPS } from '../../constants/appRegistry';
+import { LaunchpadIcon } from '../common/icons/AppIcons';
 import DockItem from './DockItem';
 
 export default function Dock() {
-  const { dockMagnification } = useSystem();
+  const { dockMagnification, isLaunchpadOpen, setIsLaunchpadOpen } = useSystem();
   const { windows, openWindow, focusWindow } = useWindow();
   const { onMouseMove, onMouseLeave, getScale, mouseX } = useDockMagnification({
     enabled: dockMagnification,
@@ -27,6 +28,8 @@ export default function Dock() {
     }
   };
 
+  const launchpadApp = { id: 'launchpad', name: 'Launchpad', icon: LaunchpadIcon };
+
   return (
     <footer className="absolute bottom-2 left-0 right-0 flex justify-center z-40 pointer-events-none">
       <div
@@ -34,7 +37,34 @@ export default function Dock() {
         onMouseLeave={onMouseLeave}
         className="pointer-events-auto h-[62px] px-3.5 pb-1 pt-1.5 rounded-full glass-chrome shadow-dock flex items-end space-x-1.5 border border-white/30 dark:border-white/10"
       >
-        {APPS.map((app) => {
+        {/* Finder App */}
+        {APPS.slice(0, 1).map((app) => {
+          const windowState = windows.find((w) => w.id === app.id);
+          return (
+            <DockItem
+              key={app.id}
+              app={app}
+              isRunning={Boolean(windowState && windowState.isOpen)}
+              isMinimized={Boolean(windowState && windowState.isMinimized)}
+              onClick={() => handleDockClick(app.id)}
+              getScale={getScale}
+              mouseX={mouseX}
+            />
+          );
+        })}
+
+        {/* Launchpad Utility Item */}
+        <DockItem
+          app={launchpadApp}
+          isRunning={isLaunchpadOpen}
+          isMinimized={false}
+          onClick={() => setIsLaunchpadOpen(!isLaunchpadOpen)}
+          getScale={getScale}
+          mouseX={mouseX}
+        />
+
+        {/* Remaining Apps */}
+        {APPS.slice(1).map((app) => {
           const windowState = windows.find((w) => w.id === app.id);
           const isRunning = Boolean(windowState && windowState.isOpen);
           const isMinimized = Boolean(windowState && windowState.isMinimized);
