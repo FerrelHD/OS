@@ -1,15 +1,29 @@
 import React from 'react';
 
 export default function TrafficLights({ onClose, onMinimize, onMaximize, isMaximized }) {
+  const stopEvent = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className="flex items-center space-x-2 traffic-group">
+    <div
+      className="flex items-center space-x-2 traffic-group"
+      onPointerDown={stopEvent}
+      onMouseDown={stopEvent}
+      onPointerUp={stopEvent}
+      onDoubleClick={stopEvent}
+    >
       {/* Close */}
       <button
+        onPointerDown={stopEvent}
+        onMouseDown={stopEvent}
+        onPointerUp={stopEvent}
+        onDoubleClick={stopEvent}
         onClick={(e) => {
           e.stopPropagation();
           onClose();
         }}
-        className="traffic-btn bg-traffic-close border border-traffic-close-border shadow-sm active:brightness-75"
+        className="traffic-btn bg-traffic-close border border-traffic-close-border shadow-sm active:brightness-75 cursor-pointer"
         title="Close (Cmd+W)"
       >
         <svg className="w-2 h-2 text-[#4c0000]" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -20,11 +34,15 @@ export default function TrafficLights({ onClose, onMinimize, onMaximize, isMaxim
 
       {/* Minimize */}
       <button
+        onPointerDown={stopEvent}
+        onMouseDown={stopEvent}
+        onPointerUp={stopEvent}
+        onDoubleClick={stopEvent}
         onClick={(e) => {
           e.stopPropagation();
           onMinimize();
         }}
-        className="traffic-btn bg-traffic-minimize border border-traffic-minimize-border shadow-sm active:brightness-75"
+        className="traffic-btn bg-traffic-minimize border border-traffic-minimize-border shadow-sm active:brightness-75 cursor-pointer"
         title="Minimize (Cmd+M)"
       >
         <svg className="w-2 h-2 text-[#4c3500]" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -34,11 +52,15 @@ export default function TrafficLights({ onClose, onMinimize, onMaximize, isMaxim
 
       {/* Maximize */}
       <button
+        onPointerDown={stopEvent}
+        onMouseDown={stopEvent}
+        onPointerUp={stopEvent}
+        onDoubleClick={stopEvent}
         onClick={(e) => {
           e.stopPropagation();
           onMaximize();
         }}
-        className="traffic-btn bg-traffic-maximize border border-traffic-maximize-border shadow-sm active:brightness-75"
+        className="traffic-btn bg-traffic-maximize border border-traffic-maximize-border shadow-sm active:brightness-75 cursor-pointer"
         title={isMaximized ? "Restore Window" : "Maximize Window"}
       >
         <svg className="w-2 h-2 text-[#004c08]" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4">

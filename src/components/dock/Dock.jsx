@@ -16,13 +16,17 @@ export default function Dock() {
   });
 
   const handleDockClick = (appId) => {
+    // Trigger macOS dock bounce animation on click
+    const itemEl = document.getElementById(`dock-item-${appId}`);
+    if (itemEl) {
+      itemEl.classList.remove('dock-item-bounce');
+      void itemEl.offsetWidth; // force reflow
+      itemEl.classList.add('dock-item-bounce');
+    }
+
     const existing = windows.find((w) => w.id === appId);
     if (existing && existing.isOpen) {
-      if (existing.isMinimized) {
-        focusWindow(appId);
-      } else {
-        focusWindow(appId);
-      }
+      focusWindow(appId);
     } else {
       openWindow(appId);
     }

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSystem } from '../context/SystemContext';
+import { useWindow } from '../context/WindowContext';
 
 export const useShortcuts = () => {
   const {
@@ -13,11 +14,30 @@ export const useShortcuts = () => {
     setIsAboutMacOpen,
     setIsLocked,
   } = useSystem();
+  const { activeWindowId, closeWindow, minimizeWindow } = useWindow();
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       const isMeta = e.metaKey || e.ctrlKey;
       const isAlt = e.altKey;
+
+      // Close active window: Cmd+W or Ctrl+W
+      if (isMeta && e.key.toLowerCase() === 'w') {
+        e.preventDefault();
+        if (activeWindowId) {
+          closeWindow(activeWindowId);
+        }
+        return;
+      }
+
+      // Minimize active window: Cmd+M or Ctrl+M
+      if (isMeta && e.key.toLowerCase() === 'm') {
+        e.preventDefault();
+        if (activeWindowId) {
+          minimizeWindow(activeWindowId);
+        }
+        return;
+      }
 
       // Spotlight: Cmd+K or Cmd+Space
       if ((isMeta && e.key.toLowerCase() === 'k') || (isMeta && e.code === 'Space')) {
@@ -68,5 +88,8 @@ export const useShortcuts = () => {
     isAboutMacOpen,
     setIsAboutMacOpen,
     setIsLocked,
+    activeWindowId,
+    closeWindow,
+    minimizeWindow,
   ]);
 };

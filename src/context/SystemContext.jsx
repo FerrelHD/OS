@@ -10,6 +10,7 @@ const DEFAULT_SETTINGS = {
   volume: 80,
   dockSize: 58,
   dockMagnification: true,
+  minimizeEffect: 'genie', // 'genie' | 'scale'
 };
 
 export const WALLPAPERS = {

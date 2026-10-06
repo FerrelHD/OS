@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useRef, useCallback } from 'react';
+import { useSystem } from './SystemContext';
 
 const WindowContext = createContext(null);
 
@@ -89,16 +90,47 @@ export const WindowProvider = ({ children }) => {
   const [windows, setWindows] = useState([]);
   const [activeWindowId, setActiveWindowId] = useState(null);
   const zIndexCounter = useRef(10);
+  const { setActiveApp } = useSystem();
+
+  // Focus the topmost available window, or Finder if none
+  const focusTopWindow = useCallback(
+    (excludeId) => {
+      setWindows((currentWindows) => {
+        const available = currentWindows.filter(
+          (w) => w.id !== excludeId && w.isOpen && !w.isMinimized
+        );
+        if (available.length > 0) {
+          const top = [...available].sort((a, b) => b.zIndex - a.zIndex)[0];
+          setActiveWindowId(top.id);
+          if (setActiveApp) setActiveApp(top.appName);
+        } else {
+          setActiveWindowId(null);
+          if (setActiveApp) setActiveApp('Finder');
+        }
+        return currentWindows;
+      });
+    },
+    [setActiveApp]
+  );
 
   // Focus a window and bring to front
-  const focusWindow = useCallback((id) => {
-    zIndexCounter.current += 1;
-    const nextZ = zIndexCounter.current;
-    setActiveWindowId(id);
-    setWindows((prev) =>
-      prev.map((win) => (win.id === id ? { ...win, zIndex: nextZ, isMinimized: false } : win))
-    );
-  }, []);
+  const focusWindow = useCallback(
+    (id) => {
+      zIndexCounter.current += 1;
+      const nextZ = zIndexCounter.current;
+      setActiveWindowId(id);
+      setWindows((prev) =>
+        prev.map((win) => {
+          if (win.id === id) {
+            if (setActiveApp) setActiveApp(win.appName);
+            return { ...win, zIndex: nextZ, isMinimized: false };
+          }
+          return win;
+        })
+      );
+    },
+    [setActiveApp]
+  );
 
   // Open app or focus if already open
   const openWindow = useCallback(
@@ -112,12 +144,14 @@ export const WindowProvider = ({ children }) => {
         minSize: { width: 320, height: 220 },
       };
 
+      zIndexCounter.current += 1;
+      const nextZ = zIndexCounter.current;
+      setActiveWindowId(appId);
+      if (setActiveApp) setActiveApp(config.appName);
+
       setWindows((prev) => {
         const existing = prev.find((w) => w.id === appId);
         if (existing) {
-          zIndexCounter.current += 1;
-          const nextZ = zIndexCounter.current;
-          setActiveWindowId(appId);
           return prev.map((w) =>
             w.id === appId
               ? {
@@ -138,7 +172,6 @@ export const WindowProvider = ({ children }) => {
         const posX = Math.max(40, Math.min(screenW - config.defaultSize.width - 40, (screenW - config.defaultSize.width) / 2 + cascadeOffset));
         const posY = Math.max(40, Math.min(screenH - config.defaultSize.height - 80, (screenH - config.defaultSize.height) / 2 - 30 + cascadeOffset));
 
-        zIndexCounter.current += 1;
         const newWindow = {
           ...config,
           isOpen: true,
@@ -147,28 +180,33 @@ export const WindowProvider = ({ children }) => {
           position: { x: posX, y: posY },
           size: config.defaultSize,
           prevRect: null,
-          zIndex: zIndexCounter.current,
+          zIndex: nextZ,
           customProps,
         };
 
-        setActiveWindowId(appId);
         return [...prev, newWindow];
       });
     },
-    []
+    [setActiveApp]
   );
 
-  const closeWindow = useCallback((id) => {
-    setWindows((prev) => prev.filter((win) => win.id !== id));
-    setActiveWindowId((prevActive) => (prevActive === id ? null : prevActive));
-  }, []);
+  const closeWindow = useCallback(
+    (id) => {
+      setWindows((prev) => prev.filter((win) => win.id !== id));
+      focusTopWindow(id);
+    },
+    [focusTopWindow]
+  );
 
-  const minimizeWindow = useCallback((id) => {
-    setWindows((prev) =>
-      prev.map((win) => (win.id === id ? { ...win, isMinimized: true } : win))
-    );
-    setActiveWindowId((prevActive) => (prevActive === id ? null : prevActive));
-  }, []);
+  const minimizeWindow = useCallback(
+    (id) => {
+      setWindows((prev) =>
+        prev.map((win) => (win.id === id ? { ...win, isMinimized: true } : win))
+      );
+      focusTopWindow(id);
+    },
+    [focusTopWindow]
+  );
 
   const maximizeWindow = useCallback((id) => {
     setWindows((prev) =>
@@ -271,6 +309,7 @@ export const WindowProvider = ({ children }) => {
         updatePosition,
         updateSize,
         snapWindow,
+        focusTopWindow,
       }}
     >
       {children}

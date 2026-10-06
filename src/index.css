@@ -78,3 +78,16 @@ body {
 .traffic-group:hover .traffic-btn svg {
   opacity: 1;
 }
+
+/* Dock Item macOS bounce animation */
+@keyframes mac-dock-bounce {
+  0% { transform: scale(1) translateY(0); }
+  25% { transform: scale(1.18) translateY(-14px); }
+  50% { transform: scale(0.96) translateY(0); }
+  75% { transform: scale(1.06) translateY(-5px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.dock-item-bounce {
+  animation: mac-dock-bounce 0.52s cubic-bezier(0.28, 0.84, 0.42, 1);
+}

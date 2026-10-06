@@ -16,6 +16,7 @@ export default function DockItem({ app, isRunning, isMinimized, onClick, getScal
 
   return (
     <div
+      id={`dock-item-${app.id}`}
       ref={itemRef}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}

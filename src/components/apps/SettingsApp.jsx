@@ -30,6 +30,7 @@ export default function SettingsApp() {
     volume,
     dockSize,
     dockMagnification,
+    minimizeEffect = 'genie',
     updateSetting,
   } = useSystem();
 
@@ -197,6 +198,39 @@ export default function SettingsApp() {
                   onChange={(e) => updateSetting('dockSize', parseInt(e.target.value, 10))}
                   className="w-full h-2 bg-black/10 dark:bg-white/20 rounded-full appearance-none accent-blue-600 cursor-pointer"
                 />
+              </div>
+
+              <div className="pt-2 border-t border-black/10 dark:border-white/10">
+                <div className="flex justify-between mb-1.5">
+                  <span className="font-medium">Minimize windows using</span>
+                  <span className="font-mono text-slate-400 capitalize">{minimizeEffect} Effect</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mt-2">
+                  <button
+                    type="button"
+                    onClick={() => updateSetting('minimizeEffect', 'genie')}
+                    className={`py-2 px-3 rounded-xl border text-xs font-medium transition flex flex-col items-center gap-1 ${
+                      minimizeEffect === 'genie'
+                        ? 'border-blue-500 bg-blue-50/60 dark:bg-blue-900/25 text-blue-600 dark:text-blue-400 font-semibold ring-2 ring-blue-500/20'
+                        : 'border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    <span>Genie Effect</span>
+                    <span className="text-[10px] text-slate-400 font-normal">Classic vacuum suction</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateSetting('minimizeEffect', 'scale')}
+                    className={`py-2 px-3 rounded-xl border text-xs font-medium transition flex flex-col items-center gap-1 ${
+                      minimizeEffect === 'scale'
+                        ? 'border-blue-500 bg-blue-50/60 dark:bg-blue-900/25 text-blue-600 dark:text-blue-400 font-semibold ring-2 ring-blue-500/20'
+                        : 'border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    <span>Scale Effect</span>
+                    <span className="text-[10px] text-slate-400 font-normal">Minimal dock scale</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
